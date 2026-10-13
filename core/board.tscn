@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://wgljy7c7su8p"]
+
+[ext_resource type="Script" uid="uid://dkws67ich4dxo" path="res://core/GameBoard.gd" id="1_tln8a"]
+[ext_resource type="Script" uid="uid://bar3jl6ath6s0" path="res://core/board_data.gd" id="2_psm7c"]
+[ext_resource type="Script" uid="uid://d4hq2kpfb3dnx" path="res://core/plant_spawner.gd" id="3_qt3id"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v2ds7"]
+size = Vector3(1, 0.9998779, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mug4"]
+albedo_color = Color(0, 0.4117647, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uegmi"]
+
+[node name="Board" type="StaticBody3D" unique_id=310599287]
+collision_layer = 2
+script = ExtResource("1_tln8a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1740018087]
+transform = Transform3D(4.5, 0, 0, 0, 0.05, 0, 0, 0, 2.5, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_v2ds7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1965602822]
+transform = Transform3D(4.5, 0, 0, 0, 0.05, 0, 0, 0, 2.5, 0, -0.05, 0)
+material_override = SubResource("StandardMaterial3D_4mug4")
+mesh = SubResource("BoxMesh_uegmi")
+
+[node name="Data" type="Node" parent="." unique_id=1323422241]
+script = ExtResource("2_psm7c")
+
+[node name="PlantSpawner" type="Node" parent="." unique_id=655785565]
+script = ExtResource("3_qt3id")

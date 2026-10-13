@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c5p443m8wefej"]
+
+[ext_resource type="PackedScene" uid="uid://wgljy7c7su8p" path="res://core/board.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://5yrxyxnpuk3m" path="res://core/DebugPlayer.tscn" id="2_0xm2m"]
+
+[sub_resource type="Environment" id="Environment_v2ds7"]
+background_mode = 2
+
+[node name="Main" type="Node3D" unique_id=1246406108]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1356946224]
+transform = Transform3D(0.91929567, 0.06594573, -0.38800353, 0.19878753, 0.773062, 0.60237765, 0.33967498, -0.6308934, 0.6975633, -1.2450045, 2.2347672, 2.1200867)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1350803156]
+environment = SubResource("Environment_v2ds7")
+
+[node name="Board" parent="." unique_id=310599287 instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="DebugPlayer" parent="." unique_id=956260451 instance=ExtResource("2_0xm2m")]

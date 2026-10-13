@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://5yrxyxnpuk3m"]
+
+[ext_resource type="Script" uid="uid://cp8rgsa360um3" path="res://core/debug_player.gd" id="1_tshfs"]
+[ext_resource type="PackedScene" uid="uid://dp16oabeudt1v" path="res://components/planter.tscn" id="2_5qbwn"]
+[ext_resource type="Script" uid="uid://doag1n80si311" path="res://core/grid_cursor.gd" id="3_65mpi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tshfs"]
+material = SubResource("StandardMaterial3D_h2yge")
+top_radius = 0.005
+bottom_radius = 0.005
+
+[node name="DebugPlayer" type="Node3D" unique_id=956260451]
+script = ExtResource("1_tshfs")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2132142914]
+
+[node name="FakeRightHand" type="Node3D" parent="." unique_id=1925704183]
+
+[node name="RayCast3D" type="RayCast3D" parent="FakeRightHand" unique_id=1184660407]
+target_position = Vector3(0, 0, -2)
+collision_mask = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FakeRightHand/RayCast3D" unique_id=1157515369]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1)
+mesh = SubResource("CylinderMesh_tshfs")
+
+[node name="Planter" parent="FakeRightHand" unique_id=1252720429 node_paths=PackedStringArray("raycast") instance=ExtResource("2_5qbwn")]
+raycast = NodePath("../RayCast3D")
+
+[node name="Cursor" type="Node" parent="FakeRightHand" unique_id=181744493 node_paths=PackedStringArray("raycast")]
+script = ExtResource("3_65mpi")
+raycast = NodePath("../RayCast3D")

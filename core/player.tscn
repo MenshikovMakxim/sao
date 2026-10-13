@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://d0qxt8iqas6uo"]
+
+[ext_resource type="Script" uid="uid://cgvddd32j4nah" path="res://core/vr_player.gd" id="1_4ae0v"]
+[ext_resource type="PackedScene" uid="uid://dp16oabeudt1v" path="res://components/planter.tscn" id="2_ptdtg"]
+[ext_resource type="Script" uid="uid://chyk8yuppe1hm" path="res://core/vr_hand.gd" id="2_y0177"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0xm2m"]
+material = SubResource("StandardMaterial3D_h2yge")
+top_radius = 0.005
+bottom_radius = 0.005
+
+[node name="Player" type="XROrigin3D" unique_id=1342226673]
+script = ExtResource("1_4ae0v")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="." unique_id=131339978]
+
+[node name="XRLeftController3D" type="XRController3D" parent="." unique_id=1054539575]
+tracker = &"left_hand"
+
+[node name="XRRightController3D" type="XRController3D" parent="." unique_id=2029026752]
+tracker = &"right_hand"
+script = ExtResource("2_y0177")
+
+[node name="RayCast3D" type="RayCast3D" parent="XRRightController3D" unique_id=220035037]
+target_position = Vector3(0, 0, -2)
+collision_mask = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XRRightController3D/RayCast3D" unique_id=1496095483]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1)
+mesh = SubResource("CylinderMesh_0xm2m")
+
+[node name="Planter" parent="XRRightController3D" unique_id=1252720429 instance=ExtResource("2_ptdtg")]

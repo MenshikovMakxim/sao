@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dp16oabeudt1v"]
+
+[ext_resource type="Script" uid="uid://d0u8ndb8tf8oi" path="res://components/planter_component.gd" id="1_whoco"]
+
+[node name="Planter" type="Node" unique_id=1252720429]
+script = ExtResource("1_whoco")
