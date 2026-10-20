@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bwqfiu2pbk8tv"]
+
+[ext_resource type="Script" uid="uid://ds622tl18o8id" path="res://components/Entities/plant_base.gd" id="1_8sobf"]
+[ext_resource type="Script" uid="uid://bm0p4epo1lu2w" path="res://components/health_component.gd" id="2_vyy7q"]
+[ext_resource type="Script" uid="uid://c36vv03h77m72" path="res://components/ranged_attack_component.gd" id="3_7s7nc"]
+[ext_resource type="PackedScene" uid="uid://dtvn5qr881fed" path="res://components/FSM/state_mashine.tscn" id="4_snjwh"]
+
+[node name="PlantBase" type="Node3D" unique_id=985077293]
+script = ExtResource("1_8sobf")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=511922428]
+script = ExtResource("2_vyy7q")
+
+[node name="RangedAttackComponent" type="Node" parent="." unique_id=825141656]
+script = ExtResource("3_7s7nc")
+
+[node name="StateMashine" parent="." unique_id=1392068282 instance=ExtResource("4_snjwh")]
