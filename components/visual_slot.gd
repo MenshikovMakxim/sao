@@ -1,50 +1,57 @@
 extends Node3D
 class_name VisualSlot
 
+@onready var audio_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
+@onready var launch_marker: Marker3D = $Marker3D
+
 var current_model: Node3D
 var anim_player: AnimationPlayer
 
-# Завантажує префаб і дістає з нього аніматор
+# 1. Завантаження 3D-моделі
 func load_model(model_scene: PackedScene) -> void:
-	# 1. Очищаємо слот, якщо там вже стояла якась модель
 	clear()
-	
+
 	if model_scene == null:
-		printerr("VisualSlot: Передано порожню модель!")
 		return
 		
-	# 2. Створюємо модель і додаємо в дерево
 	current_model = model_scene.instantiate() as Node3D
 	add_child(current_model)
-	
-	# 3. Шукаємо AnimationPlayer всередині моделі
-	_find_animation_player(current_model)
-	
-	# 4. Якщо є анімація спокою - одразу вмикаємо
+
+	# Шукаємо AnimationPlayer всередині завантаженої моделі
+	anim_player = _find_animation_player(current_model)
 	play_animation("idle")
 
-# Видаляє поточну модель
 func clear() -> void:
 	if current_model:
 		current_model.queue_free()
 		current_model = null
 		anim_player = null
 
-# Пускає анімацію за іменем (безпечно, без крашів)
+# 2. Анімації
 func play_animation(anim_name: String) -> void:
 	if anim_player and anim_player.has_animation(anim_name):
 		anim_player.play(anim_name)
 
-# --- Приватні методи ---
+# 3. Звуки (Грає будь-який AudioStream)
+func play_sound(stream: AudioStream) -> void:
+	if stream and audio_player:
+		audio_player.stream = stream
+		audio_player.play()
 
-# Проста рекурсивна функція: перебирає всі вузли моделі, поки не знайде AnimationPlayer
-func _find_animation_player(node: Node) -> void:
-	# Спочатку перевіряємо дітей першого рівня
+# 4. Точна точка вильоту снаряда (наприклад, з рота Горохостріла)
+func get_launch_position() -> Vector3:
+	if launch_marker:
+		return launch_marker.global_position
+	return global_position # Fallback, якщо маркер не налаштовано
+
+# --- Допоміжний метод пошуку AnimationPlayer ---
+func _find_animation_player(node: Node) -> AnimationPlayer:
+	if node is AnimationPlayer:
+		return node as AnimationPlayer
+		
 	for child in node.get_children():
-		if child is AnimationPlayer:
-			anim_player = child
-			return
+		var found = _find_animation_player(child)
+		if found:
+			return found
 			
-	# Якщо не знайшли, шукаємо глибше
-	for child in node.get_children():
-		_find_animation_player(child)
+	return null

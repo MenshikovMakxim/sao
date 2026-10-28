@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dkws67ich4dxo" path="res://core/GameBoard.gd" id="1_tln8a"]
 [ext_resource type="Script" uid="uid://bar3jl6ath6s0" path="res://core/board_data.gd" id="2_psm7c"]
 [ext_resource type="Script" uid="uid://d4hq2kpfb3dnx" path="res://core/plant_spawner.gd" id="3_qt3id"]
+[ext_resource type="Script" uid="uid://vqgpltcbygo3" path="res://core/projectile_manager.gd" id="4_ic0bv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v2ds7"]
 size = Vector3(1, 0.9998779, 1)
@@ -30,3 +31,10 @@ script = ExtResource("2_psm7c")
 
 [node name="PlantSpawner" type="Node" parent="." unique_id=655785565]
 script = ExtResource("3_qt3id")
+
+[node name="Plants" type="Node" parent="." unique_id=1996591573]
+
+[node name="Enemies" type="Node" parent="." unique_id=1107879581]
+
+[node name="ProjectileManager" type="Node3D" parent="." unique_id=1412741610]
+script = ExtResource("4_ic0bv")

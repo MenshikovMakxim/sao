@@ -7,11 +7,8 @@ signal died()
 var max_hp: float = 100.0
 var current_hp: float = 100.0
 
-# Запобіжник, щоб об'єкт не "вмирав" двічі, якщо в нього 
-# в один кадр прилетять дві горошини, коли в нього залишалось 1 ХП.
 var is_dead: bool = false 
 
-# Викликається при спавні з даними з Resource (PlantData або EnemyStats)
 func set_max_hp(value: float) -> void:
 	max_hp = value
 	current_hp = max_hp
@@ -33,7 +30,7 @@ func take_damage(amount: float) -> void:
 
 func heal(amount: float) -> void:
 	if is_dead:
-		return # Мертвих не лікуємо (хіба що ти додаси Некроманта)
+		return
 		
 	current_hp += amount
 	current_hp = clamp(current_hp, 0.0, max_hp)

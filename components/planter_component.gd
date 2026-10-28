@@ -1,10 +1,9 @@
 extends Node
-
 class_name PlanterComponent
 
 @export var raycast: RayCast3D
 
-func get_valid_board() -> GameBoard:
+func _get_valid_board() -> GameBoard:
 	raycast.force_raycast_update()
 
 	if not raycast.is_colliding():
@@ -15,21 +14,15 @@ func get_valid_board() -> GameBoard:
 		return collider as GameBoard 
 		
 	return null
-
-func try_plant() -> void:
-	var board := get_valid_board()
+	
+## Try to plant seed, send cell coordinates to GameBoard
+func try_plant(seed_id: String) -> void:
+	var board := _get_valid_board()
 
 	if board == null:
 		return 
 		
 	var hit_point = raycast.get_collision_point()
 	var cell = board.get_cell_from_global(hit_point)
-
-	if cell == Vector2i(-1, -1):
-		print("Мимо сітки.") 
-		return
-		
-	if board.request_planting(cell):
-		print("Посаджено у клітинку: ", cell)
-	else:
-		print("Відмова: клітинка ", cell, " зайнята!")
+	
+	board.try_planting(cell, seed_id)

@@ -1,17 +1,16 @@
 extends Node
 class_name BoardData
 
-# Головний словник. 
-# Ключ: Vector2i (координати клітинки)
-# Значення: Словник з двома полями {"plant": Node3D, "enemies": Array}
+## Grid of cells
+## grid[cell]{ "plant": [Node3D], "enemies": Array [Node3D] }
 var grid: Dictionary = {}
 
-# Приватна функція: якщо клітинки ще немає в словнику, вона її створює
+## Create cell if it doesn`t exist
 func _get_or_create_cell(cell: Vector2i) -> Dictionary:
 	if not grid.has(cell):
 		grid[cell] = {
 			"plant": null,
-			"enemies": [] # Зомбі може бути багато, тому це масив
+			"enemies": []
 		}
 	return grid[cell]
 
@@ -21,7 +20,6 @@ func _get_or_create_cell(cell: Vector2i) -> Dictionary:
 
 func can_place(cell: Vector2i) -> bool:
 	var cell_data = _get_or_create_cell(cell)
-	# Садити можна тільки якщо там немає іншої рослини
 	return cell_data["plant"] == null
 
 func place_plant(cell: Vector2i, plant: Node3D) -> void:

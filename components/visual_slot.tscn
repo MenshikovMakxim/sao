@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b65xae4dnm2co"]
+
+[ext_resource type="Script" uid="uid://d21wgy1m0n6at" path="res://components/visual_slot.gd" id="1_pqqbo"]
+
+[node name="VisualSlot" type="Node3D" unique_id=1501516270]
+script = ExtResource("1_pqqbo")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=370754106]
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=695114545]

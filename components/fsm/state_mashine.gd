@@ -1,7 +1,7 @@
 extends Node
 class_name StateMachine
 
-@export var initial_state: Globals.EnemyState = Globals.EnemyState.MOVING
+@export var initial_state: Types.EnemyState = Globals.EnemyState.MOVING
 @export var actor: Node3D
 
 var states: Dictionary = {}
@@ -17,8 +17,8 @@ func _ready() -> void:
 	#Запуск початкового стану (через call_deferred, щоб усі інші вузли сцени встигли провантажитись)
 	call_deferred("change_state", initial_state)
 
-func change_state(new_state_id: Globals.EnemyState) -> void:
-	# Перевірка від дурня, щоб не перемикатись на стан, в якому ми вже є
+func change_state(new_state_id: Types.EnemyState) -> void:
+	# Перевірка, щоб не перемикатись на стан, в якому ми вже є
 	if current_state and current_state.state_id == new_state_id:
 		return
 		
