@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cp8rgsa360um3" path="res://core/debug_player.gd" id="1_tshfs"]
 [ext_resource type="PackedScene" uid="uid://dp16oabeudt1v" path="res://components/planter.tscn" id="2_5qbwn"]
 [ext_resource type="Script" uid="uid://doag1n80si311" path="res://core/grid_cursor.gd" id="3_65mpi"]
+[ext_resource type="Script" path="res://components/enemy_deployer_component.gd" id="4_enemy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
 albedo_color = Color(1, 0, 0, 1)
@@ -28,6 +29,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0
 mesh = SubResource("CylinderMesh_tshfs")
 
 [node name="Planter" parent="FakeRightHand" unique_id=1252720429 node_paths=PackedStringArray("raycast") instance=ExtResource("2_5qbwn")]
+raycast = NodePath("../RayCast3D")
+
+[node name="EnemyDeployer" type="Node" parent="FakeRightHand" node_paths=PackedStringArray("raycast")]
+script = ExtResource("4_enemy")
 raycast = NodePath("../RayCast3D")
 
 [node name="Cursor" type="Node" parent="FakeRightHand" unique_id=181744493 node_paths=PackedStringArray("raycast")]

@@ -9,6 +9,9 @@ class_name PlantBase
 signal attack_fired(plant: PlantBase, spawn_pos: Vector3, dir: Vector2i)
 
 var _data: PlantData
+var data: PlantData:
+	get:
+		return _data
 var _target_checker:  Callable
 var attack_data: Dictionary 
 

@@ -36,8 +36,11 @@ func _process(delta: float):
 	var target = board.data.get_first_enemy_at(current_cell)
 	
 	if target != null and target.is_in_group("enemies"):
-		var dist = global_position.distance_to(target.global_position)
-		if dist <= data.hit_distance:
+		var offset := Vector2(
+			global_position.x - target.global_position.x,
+			global_position.z - target.global_position.z
+		)
+		if offset.length() <= data.hit_distance:
 			impact(target)
 
 func impact(target: Node3D):

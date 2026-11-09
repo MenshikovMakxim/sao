@@ -7,7 +7,7 @@ class_name GameBoard
 
 @onready var data: BoardData = $Data
 @onready var spawner: PlantSpawner = $PlantSpawner
-@onready var enemies_place: Node = $Enemies
+@onready var enemy_spawner: EnemySpawner = $Enemies
 @onready var proj_manager: ProjectileManager = $ProjectileManager
 
 func _ready() -> void:
@@ -34,6 +34,14 @@ func try_planting(cell: Vector2i, seed_id: String) -> bool:
 	data.place_plant(cell, new_plant)
 
 	return true
+
+## Try to spawn an enemy in the given cell
+func try_spawning_enemy(cell: Vector2i) -> bool:
+	if cell == Vector2i(-1, -1):
+		return false
+
+	return enemy_spawner.spawn(self, cell) != null
+
 #func try_planting(cell: Vector2i, seed_id: String) -> bool:
 	#if data.can_place(cell):
 		#var spawn_pos = get_spawn_position(cell)

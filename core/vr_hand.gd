@@ -9,4 +9,4 @@ func _ready():
 func _on_button_pressed(action_name: String):
 	# В OpenXR тригер зазвичай називається "trigger_click" або як ти налаштував у Action Map
 	if action_name == "trigger_click":
-		planter.try_plant()
+		planter.try_plant("test_plant")

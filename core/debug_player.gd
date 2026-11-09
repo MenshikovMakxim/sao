@@ -6,6 +6,7 @@ var speed: float = 2.0
 @onready var camera = $Camera3D
 @onready var right_fake_controller = $FakeRightHand
 @onready var planter: PlanterComponent = $FakeRightHand/Planter
+@onready var enemy_deployer: EnemyDeployerComponent = $FakeRightHand/EnemyDeployer
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -23,6 +24,10 @@ func _input(event):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			# Просто смикаємо компонент за ниточку
 			planter.try_plant("test_plant")
+
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			enemy_deployer.try_spawn()
 
 func _process(delta):
 	var dir = Vector3.ZERO

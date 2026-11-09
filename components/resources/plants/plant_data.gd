@@ -17,4 +17,4 @@ class_name PlantData
 
 @export_category("Візуал та Префаби")
 @export var visual_model: PackedScene
-@export var projectile_scene: PackedScene
+@export var projectile_data: ProjectileData
