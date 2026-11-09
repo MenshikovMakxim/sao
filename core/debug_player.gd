@@ -22,7 +22,7 @@ func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			# Просто смикаємо компонент за ниточку
-			planter.try_plant()
+			planter.try_plant("test_plant")
 
 func _process(delta):
 	var dir = Vector3.ZERO

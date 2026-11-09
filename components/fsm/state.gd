@@ -2,10 +2,10 @@ extends Node
 class_name State
 
 # Сигнал для команди Машині: "Перемикай мене на ось це"
-signal transition_requested(new_state: Types.EnemyState)
+signal transition_requested(new_state: Types.States)
 
 # В інспекторі ти будеш вибирати, який саме це стан (з нашого Globals)
-@export var state_id: Types.EnemyState
+@export var state_id: Types.States
 
 # Посилання на головний вузол (зомбі), щоб рухати його і брати його змінні
 var actor: Node3D 

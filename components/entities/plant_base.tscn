@@ -5,6 +5,9 @@
 [ext_resource type="Script" uid="uid://c36vv03h77m72" path="res://components/ranged_attack_component.gd" id="3_7s7nc"]
 [ext_resource type="PackedScene" uid="uid://b65xae4dnm2co" path="res://components/visual_slot.tscn" id="4_fo5ds"]
 [ext_resource type="PackedScene" uid="uid://dtvn5qr881fed" path="res://components/fsm/state_mashine.tscn" id="4_snjwh"]
+[ext_resource type="Script" uid="uid://byn53ydneyo6a" path="res://components/fsm/plant_attack_state.gd" id="5_attack"]
+[ext_resource type="Script" uid="uid://b207a4yxyqxpw" path="res://components/fsm/plant_idle_state.gd" id="6_idle"]
+[ext_resource type="Script" uid="uid://cxju5k8x6rcii" path="res://components/fsm/plant_death_state.gd" id="7_death"]
 
 [node name="PlantBase" type="Node3D" unique_id=985077293]
 script = ExtResource("1_8sobf")
@@ -16,5 +19,17 @@ script = ExtResource("2_vyy7q")
 script = ExtResource("3_7s7nc")
 
 [node name="StateMashine" parent="." unique_id=1392068282 instance=ExtResource("4_snjwh")]
+
+[node name="PlantIdleState" type="Node" parent="StateMashine" unique_id=201000001]
+script = ExtResource("6_idle")
+state_id = 1
+
+[node name="PlantAttackState" type="Node" parent="StateMashine" unique_id=201000002]
+script = ExtResource("5_attack")
+state_id = 2
+
+[node name="PlantDeathState" type="Node" parent="StateMashine" unique_id=201000003]
+script = ExtResource("7_death")
+state_id = 3
 
 [node name="VisualSlot" parent="." unique_id=1501516270 instance=ExtResource("4_fo5ds")]

@@ -4,9 +4,12 @@ class_name PlantSpawner
 
 func spawn(plant_data: PlantData, spawn_pos: Vector3, target_checker: Callable) -> PlantBase:
 	var plant = Globals.get_base_plant() as PlantBase
-	plant.setup(plant_data, target_checker)
-	plant.global_position = spawn_pos
+	if plant == null:
+		return null
+
 	add_child(plant)
+	plant.global_position = spawn_pos
+	plant.setup(plant_data, target_checker)
 
 
 	print("Спавнер виростив: ", plant_data.display_name)

@@ -8,7 +8,7 @@ class_name GameBoard
 @onready var data: BoardData = $Data
 @onready var spawner: PlantSpawner = $PlantSpawner
 @onready var enemies_place: Node = $Enemies
-@onready var proj_manager: ProjectileBase = $ProjectileManager
+@onready var proj_manager: ProjectileManager = $ProjectileManager
 
 func _ready() -> void:
 	proj_manager.board = self

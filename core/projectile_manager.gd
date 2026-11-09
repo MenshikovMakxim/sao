@@ -11,7 +11,7 @@ func _on_plant_attack_fired(plant: PlantBase, spawn_pos: Vector3, dir: Vector2i)
 
 	var proj = Globals.get_base_projectile()
 	add_child(proj)
-	
+
 	# tree_exited - це вбудований сигнал Godot, який викликається перед видаленням об'єкта (queue_free)
 	proj.tree_exited.connect(_on_projectile_destroyed.bind(proj.get_instance_id()))
 

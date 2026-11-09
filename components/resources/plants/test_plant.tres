@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PlantData" format=3 uid="uid://d0eqhrj5r34dl"]
+
+[ext_resource type="Script" uid="uid://bt0oblu0ragbg" path="res://components/resources/plants/plant_data.gd" id="1_plant"]
+[ext_resource type="PackedScene" uid="uid://bvpitqbb5x1cg" path="res://characters/plants/shooter.glb" id="2_eauhv"]
+
+[resource]
+script = ExtResource("1_plant")
+id = "test_plant"
+display_name = "Тестова Рослина"
+attack_type = 1
+visual_model = ExtResource("2_eauhv")

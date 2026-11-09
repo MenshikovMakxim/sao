@@ -1,8 +1,13 @@
 extends Node
 class_name StateMachine
 
-@export var initial_state: Types.EnemyState = Globals.EnemyState.MOVING
-@export var actor: Node3D
+@export var initial_state: Types.States = Types.States.IDLE
+@export var actor: Node3D:
+	set(value):
+		actor = value
+		for child in get_children():
+			if child is State:
+				child.actor = actor
 
 var states: Dictionary = {}
 var current_state: State
@@ -17,7 +22,7 @@ func _ready() -> void:
 	#Запуск початкового стану (через call_deferred, щоб усі інші вузли сцени встигли провантажитись)
 	call_deferred("change_state", initial_state)
 
-func change_state(new_state_id: Types.EnemyState) -> void:
+func change_state(new_state_id: Types.States) -> void:
 	# Перевірка, щоб не перемикатись на стан, в якому ми вже є
 	if current_state and current_state.state_id == new_state_id:
 		return
@@ -30,7 +35,7 @@ func change_state(new_state_id: Types.EnemyState) -> void:
 	if current_state:
 		current_state.enter()
 	else:
-		printerr("Помилка FSM: Стан %s не знайдено!" % new_state_id)
+		printerr("Помилка FSM: Стан %s не знайдено! Доступні стани: %s" % [new_state_id, states.keys()])
 
 func _physics_process(delta: float) -> void:
 	# Машина просто делегує оновлення активному стану

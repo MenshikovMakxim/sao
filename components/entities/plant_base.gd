@@ -3,14 +3,17 @@ class_name PlantBase
 
 @onready var health := $HealthComponent
 @onready var ranged_attack := $RangedAttackComponent
-@onready var resource_generator := $ResourceGeneratorComponent
 @onready var visual_slot := $VisualSlot
+@onready var state_machine: StateMachine = $StateMashine
 
 signal attack_fired(plant: PlantBase, spawn_pos: Vector3, dir: Vector2i)
 
 var _data: PlantData
 var _target_checker:  Callable
 var attack_data: Dictionary 
+
+func _ready() -> void:
+	state_machine.actor = self
 
 ## Setup basic properties 
 func setup(data: PlantData, target_checker: Callable):
@@ -29,12 +32,15 @@ func _setup_data() -> void:
 		attack_data["rate"] = _data.attack_rate
 		attack_data["range"] = _data.attack_range
 		ranged_attack.setup()
-		
-	if resource_generator:
-		resource_generator.setup()
-	
+
 	if _data.visual_model != null:
 		visual_slot.load_model(_data.visual_model)
 
+func has_target() -> bool:
+	if not _target_checker.is_valid():
+		return false
+
+	return _target_checker.call()
+
 func _on_death():
-	queue_free()
+	state_machine.change_state(Types.States.DEAD)

@@ -15,7 +15,7 @@ func get_base_projectile() -> ProjectileBase:
 # ==========================================
 var plants_db: Dictionary = {
 	# Ключ - це ID, значення - файл налаштувань (Resource)
-	"test_plant": null,
+	"test_plant": preload("res://components/resources/plants/test_plant.tres"),
 }
 
 func get_plant(id: String) -> PlantData:

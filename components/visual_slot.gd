@@ -19,7 +19,7 @@ func load_model(model_scene: PackedScene) -> void:
 
 	# Шукаємо AnimationPlayer всередині завантаженої моделі
 	anim_player = _find_animation_player(current_model)
-	play_animation("idle")
+	play_animation("Idle")
 
 func clear() -> void:
 	if current_model:
